@@ -1,4 +1,6 @@
+const axios = require('axios');
 const db = require('../configs/database.config');
+const session = require('../configs/neo4j.config');
 const helper = require('../utils/helper');
 const fileWrite = require('fs');
 const UPPER = 1, LOWER = 1000;
@@ -59,10 +61,56 @@ async function createDummyCoursesNeo4j() {
     }
 }
 
+async function getDummyFromPublicAPIs() {
+    let data;
+    await axios.get("https://api.publicapis.org/entries")
+        .then(res => {
+            data = res.data;
+        })
+        .catch(err => {
+            {
+                console.log("error: ", err)
+            }
+        })
+    return data;
+}
+
+async function testConnectNeo4j() {
+    let res = [];
+    // session.run('match (n) return n').subscribe({
+    //     onNext: record => {
+    //         // console.log("record: ", record._fields[0])
+    //         res = record._fields[0];
+    //     },
+    //     onCompleted: () => {
+
+    //     }
+    // })
+
+    await session
+        .run('match (n) return n')
+        .then(result => {
+            result.records.forEach(record => {
+                // console.log(record._fields[0]);
+                res.push(record._fields[0]);
+            })
+        })
+        .catch(error => {
+            console.log(error)
+        })
+        .then(() => {
+            return res;
+        })
+
+    return res;
+}
+
 
 module.exports = {
     findAll,
     createDummyCourses,
     findById,
-    createDummyCoursesNeo4j
+    createDummyCoursesNeo4j,
+    getDummyFromPublicAPIs,
+    testConnectNeo4j
 }

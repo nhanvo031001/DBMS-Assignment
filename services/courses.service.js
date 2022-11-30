@@ -26,10 +26,20 @@ async function createDummyCoursesNeo4j() {
     return courseRepository.createDummyCoursesNeo4j();
 }
 
+async function getDummyFromPublicAPIs() {
+    return courseRepository.getDummyFromPublicAPIs();
+}
+
+async function testConnectNeo4j() {
+    return courseRepository.testConnectNeo4j();
+}
+
 module.exports = {
     findAll,
     findById,
     createCourse,
     createDummyCourses,
-    createDummyCoursesNeo4j
+    createDummyCoursesNeo4j,
+    getDummyFromPublicAPIs,
+    testConnectNeo4j
 }

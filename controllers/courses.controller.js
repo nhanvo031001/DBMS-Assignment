@@ -52,10 +52,35 @@ async function createDummyCoursesNeo4j(req, res, next) {
     }
 }
 
+async function getDummyFromPublicAPIs(req, res, next) {
+    try {
+        const result = await coursesService.getDummyFromPublicAPIs();
+        res.send(new APIResponse("200", "OK", result.entries));
+    } catch (err) {
+        console.error(`Error get courses: `, err.message);
+        res.send(new APIResponse("404", "Not Found", null));
+    }
+}
+
+async function testConnectNeo4j(req, res, next) {
+    try {
+        const result = await coursesService.testConnectNeo4j();
+        console.log("result: ", result)
+        res.send(new APIResponse("200", "OK", result));
+    } catch (err) {
+        console.error(`Error get courses: `, err.message);
+        res.send(new APIResponse("404", "Not Found", null));
+    }
+}
+
+
+
 module.exports = {
     findAll,
     findById,
     createCourse,
     createDummyCourses,
-    createDummyCoursesNeo4j
+    createDummyCoursesNeo4j,
+    getDummyFromPublicAPIs,
+    testConnectNeo4j
 }

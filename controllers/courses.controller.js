@@ -1,6 +1,6 @@
 const coursesService = require('../services/courses.service');
 const APIResponse = require('../models/APIResponse');
-const db = require('../configs/database.config');
+const db = require('../configs/mysql.config');
 
 async function findAll(req, res, next) {
     try {
@@ -65,7 +65,18 @@ async function getDummyFromPublicAPIs(req, res, next) {
 async function testConnectNeo4j(req, res, next) {
     try {
         const result = await coursesService.testConnectNeo4j();
-        console.log("result: ", result)
+        // console.log("result: ", result)
+        res.send(new APIResponse("200", "OK", result));
+    } catch (err) {
+        console.error(`Error get courses: `, err.message);
+        res.send(new APIResponse("404", "Not Found", null));
+    }
+}
+
+async function createDummyFromPublicAPIs(req, res, next) {
+    try {
+        const result = await coursesService.createDummyFromPublicAPIs();
+        // console.log("result: ", result)
         res.send(new APIResponse("200", "OK", result));
     } catch (err) {
         console.error(`Error get courses: `, err.message);
@@ -82,5 +93,6 @@ module.exports = {
     createDummyCourses,
     createDummyCoursesNeo4j,
     getDummyFromPublicAPIs,
-    testConnectNeo4j
+    testConnectNeo4j,
+    createDummyFromPublicAPIs
 }

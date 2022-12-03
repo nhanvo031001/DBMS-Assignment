@@ -1,5 +1,5 @@
 const axios = require('axios');
-const db = require('../configs/database.config');
+const db = require('../configs/mysql.config');
 const session = require('../configs/neo4j.config');
 const helper = require('../utils/helper');
 const fileWrite = require('fs');
@@ -105,6 +105,51 @@ async function testConnectNeo4j() {
     return res;
 }
 
+async function createDummyFromPublicAPIs() {
+
+    // get data from public api
+    let data = [];
+    await axios.get("https://api.publicapis.org/entries")
+        .then(res => {
+            data = res.data.entries;
+        })
+        .catch(err => {
+            {
+                console.log("error: ", err)
+            }
+        })
+
+
+    let count = 0;
+    for (const record of data) {
+        await session
+            .run('create (shortName:PLAYER{name:$name, description: $description});', {
+                shortName: record.API,
+                name: record.API,
+                description: record.Description
+            })
+            .then(result => {
+                console.log("result create dummy: ", result);
+                // res = result;
+            })
+            .catch(error => {
+                console.log(error)
+            })
+            .then(() => {
+
+            })
+
+        count +=1;
+        if (count == 10) {
+            break;
+        }
+    }
+
+
+    console.log("create successfully")
+
+}
+
 
 module.exports = {
     findAll,
@@ -112,5 +157,6 @@ module.exports = {
     findById,
     createDummyCoursesNeo4j,
     getDummyFromPublicAPIs,
-    testConnectNeo4j
+    testConnectNeo4j,
+    createDummyFromPublicAPIs
 }

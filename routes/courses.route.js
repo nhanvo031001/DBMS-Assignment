@@ -9,5 +9,6 @@ router.get('/connect/neo4j', coursesController.testConnectNeo4j)
 router.post('/', coursesController.createCourse);
 router.post('/dummy', coursesController.createDummyCourses);
 router.post('/dummyNeo4j', coursesController.createDummyCoursesNeo4j);
+router.post('/public/apis', coursesController.createDummyFromPublicAPIs);
 
 module.exports = router;

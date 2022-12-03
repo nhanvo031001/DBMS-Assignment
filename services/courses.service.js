@@ -34,6 +34,10 @@ async function testConnectNeo4j() {
     return courseRepository.testConnectNeo4j();
 }
 
+async function createDummyFromPublicAPIs() {
+    return courseRepository.createDummyFromPublicAPIs();
+}
+
 module.exports = {
     findAll,
     findById,
@@ -41,5 +45,6 @@ module.exports = {
     createDummyCourses,
     createDummyCoursesNeo4j,
     getDummyFromPublicAPIs,
-    testConnectNeo4j
+    testConnectNeo4j,
+    createDummyFromPublicAPIs
 }

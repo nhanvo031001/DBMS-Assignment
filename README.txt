@@ -1,6 +1,6 @@
 
 - Flow backend:
-	file route -> controller -> service -> repo
+	file index.js -> file route -> controller -> service -> repo
 
 - api free: https://api.punkapi.com/v2/beers
 
@@ -13,6 +13,6 @@ Các bước khi clone về:
 	nodemon index.js
 
 
-
+Module neo4j-driver: https://www.npmjs.com/package/neo4j-driver
 
 

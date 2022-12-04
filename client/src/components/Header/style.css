@@ -1,0 +1,47 @@
+.Header .link {
+    text-decoration: none;
+    color: #101828;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.Header .link:hover {
+    border-bottom: 2px solid #0a58ca;
+    padding-bottom: 2px;
+}
+
+.Header .icon {
+    margin-top: -3px;
+}
+
+.Header li {
+    list-style: none;
+}
+
+.Header {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+.Header .mid {
+    display: flex;
+}
+
+.Header .mid-list {
+    display: flex;
+    justify-content: space-around;
+    width: 750px;
+    padding: 0;
+    margin: 0;
+    line-height: 60px;
+}
+
+.Header .right {
+    line-height: 60px;
+}
+
+.Header #logo {
+    width: 60px;
+    height: 60px;
+}

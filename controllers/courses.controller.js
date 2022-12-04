@@ -84,6 +84,39 @@ async function createDummyFromPublicAPIs(req, res, next) {
     }
 }
 
+async function createDummyFromPublicAPIsMySql(req, res, next) {
+    try {
+        const result = await coursesService.createDummyFromPublicAPIsMySql();
+        // console.log("result: ", result)
+        res.send(new APIResponse("200", "OK", result));
+    } catch (err) {
+        console.error(`Error get courses: `, err.message);
+        res.send(new APIResponse("404", "Not Found", null));
+    }
+}
+
+async function indexTestMySql(req, res, next) {
+    try {
+        const result = await coursesService.indexTestMySql();
+        // console.log("result: ", result)
+        res.send(new APIResponse("200", "OK", result));
+    } catch (err) {
+        console.error(`Error get courses: `, err.message);
+        res.send(new APIResponse("404", "Not Found", null));
+    }
+}
+
+async function indexTestNeo4j(req, res, next) {
+    try {
+        const result = await coursesService.indexTestNeo4j();
+        // console.log("result: ", result)
+        res.send(new APIResponse("200", "OK", result));
+    } catch (err) {
+        console.error(`Error get courses: `, err.message);
+        res.send(new APIResponse("404", "Not Found", null));
+    }
+}
+
 
 
 module.exports = {
@@ -94,5 +127,8 @@ module.exports = {
     createDummyCoursesNeo4j,
     getDummyFromPublicAPIs,
     testConnectNeo4j,
-    createDummyFromPublicAPIs
+    createDummyFromPublicAPIs,
+    createDummyFromPublicAPIsMySql,
+    indexTestMySql,
+    indexTestNeo4j,
 }

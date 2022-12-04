@@ -38,6 +38,18 @@ async function createDummyFromPublicAPIs() {
     return courseRepository.createDummyFromPublicAPIs();
 }
 
+async function createDummyFromPublicAPIsMySql() {
+    return courseRepository.createDummyFromPublicAPIsMySql();
+}
+
+async function indexTestMySql() {
+    return courseRepository.indexTestMySql();
+}
+
+async function indexTestNeo4j() {
+    return courseRepository.indexTestNeo4j();
+}
+
 module.exports = {
     findAll,
     findById,
@@ -46,5 +58,8 @@ module.exports = {
     createDummyCoursesNeo4j,
     getDummyFromPublicAPIs,
     testConnectNeo4j,
-    createDummyFromPublicAPIs
+    createDummyFromPublicAPIs,
+    createDummyFromPublicAPIsMySql,
+    indexTestNeo4j,
+    indexTestMySql
 }

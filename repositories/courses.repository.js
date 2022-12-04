@@ -129,7 +129,7 @@ async function createDummyFromPublicAPIs() {
                 description: record.Description
             })
             .then(result => {
-                console.log("result create dummy: ", result);
+                // console.log("result create dummy: ", result);
                 // res = result;
             })
             .catch(error => {
@@ -139,15 +139,118 @@ async function createDummyFromPublicAPIs() {
 
             })
 
-        count +=1;
-        if (count == 10) {
-            break;
-        }
+        // count +=1;
+        // if (count == 10) {
+        //     break;
+        // }
     }
 
 
     console.log("create successfully")
 
+}
+
+async function createDummyFromPublicAPIsMySql() {
+
+    // get data from public api
+    let data = [];
+    await axios.get("https://api.publicapis.org/entries")
+        .then(res => {
+            data = res.data.entries;
+        })
+        .catch(err => {
+            {
+                console.log("error: ", err)
+            }
+        })
+
+
+    let count = 0;
+    let content = ''
+    for (const record of data) {
+        let api = record.API;
+        let des = record.Description
+
+        api = api.replaceAll('"', "");
+        api = api.replaceAll(`'`, "");
+        des = des.replaceAll('"', "");
+        des = des.replaceAll(`'`, "");
+
+        content += `
+            INSERT INTO COURSE (COURSE_NAME, DESCRIPTION)
+            VALUES ('${api}', '${des}');
+        `
+
+        // console.log("content :", content)
+
+        const [result] = await db.query(`
+            INSERT INTO COURSE (COURSE_NAME, DESCRIPTION)
+            VALUES ('${api}', '${des}');
+        `);
+
+
+
+        count +=1;
+        // if (count == 3) {
+        //     break;
+        // }
+        console.log("count: ", count)
+    }
+
+
+    console.log("create successfully mysql")
+
+    console.log("content :", content)
+
+}
+
+async function indexTestMySql() {
+    try {
+        var pre_query = new Date().getTime();
+        // console.log("rows mysql: ", rows)
+        // const [rows] = await db.query("select * from course where match(description) against('cat' IN BOOLEAN MODE);");
+        const [rows] = await db.query("SELECT * FROM course WHERE course.description like ?", ["%facts%"]);
+        // console.log("rows: ", rows)
+        var post_query = new Date().getTime();
+        console.log("time exec mysql: ", (post_query - pre_query)/1000);
+        return rows
+    } catch (err) {
+        console.log("Error: ", err.message);
+    }
+}
+
+async function indexTestNeo4j() {
+    let res = [];
+
+    var pre_query = new Date().getTime();
+    await session
+        .run('CALL db.index.fulltext.queryNodes("fulltext_description_index", "cat")\n' +
+            'YIELD node, score\n' +
+            'RETURN node.name, node.description, score\n')
+        .then(result => {
+
+            result.records.forEach(record => {
+                let obj = {};
+                for (let i = 0; i < record.keys.length; i++) {
+                    obj[record.keys[i]] = record._fields[i];
+                }
+                // console.log("object after merge: ", obj);
+                res.push(obj);
+            })
+        })
+        .catch(error => {
+            console.log(error)
+        })
+        .then(() => {
+
+            var post_query = new Date().getTime();
+            console.log("time exec neo4j: ", (post_query - pre_query)/1000);
+
+            return res;
+        })
+
+    // console.log("result neo4j index: ", res)
+    return res;
 }
 
 
@@ -158,5 +261,8 @@ module.exports = {
     createDummyCoursesNeo4j,
     getDummyFromPublicAPIs,
     testConnectNeo4j,
-    createDummyFromPublicAPIs
+    createDummyFromPublicAPIs,
+    createDummyFromPublicAPIsMySql,
+    indexTestNeo4j,
+    indexTestMySql
 }

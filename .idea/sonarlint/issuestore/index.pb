@@ -54,17 +54,5 @@ S
 #client/src/components/Body/index.js,1\2\12d1b7506feddcba6a517f90ce0d6d32c900d0c3
 ]
 -client/src/components/IndexingTable/style.css,e\1\e1cdab49b810e779b9f4cdb9225a7ad4ed2ae327
-W
-'client/src/components/Indexing/index.js,d\5\d566fecf3e9e010e54b68d26f9f908a36aab8596
-e
-5client/src/components/IndexingTableSearchBar/index.js,0\7\0744a070250f674cb0cc52a95e3adf780bb1acd5
-C
-client/src/index.js,7\6\76cbb38a5cef42611c7af13985f39248682f4aa1
 Q
 !client/src/constants/constants.js,0\8\083f32b88fd56bdccc443395fff8105b635b754f
-A
-client/src/App.js,f\6\f6b8a135eb07bb80aa582994bcf1a8ccacd783ee
-8
-index.js,a\7\a77b15c0d64cf6111e025645e562faf8ccabb9d7
-\
-,client/src/components/IndexingTable/index.js,7\9\79df4c4d5f33fe7ebcdce541e1bd3ca65a329a8d

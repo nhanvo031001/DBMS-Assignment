@@ -3,22 +3,53 @@ import {Table} from 'antd';
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {BASE_URL_SERVER} from "../../constants/constants";
+import {useDispatch, useSelector} from "react-redux";
+import {setBooks} from "../../redux/bookReducer";
 
 export default function IndexingTable() {
 
+    const [firstRender, setFirstRender] = useState(true);
     const [data, setData] = useState([]);
+    const {books} = useSelector(state => state.book);
+    const dispatch = useDispatch();
 
-    useEffect(() => {
-        axios.get(BASE_URL_SERVER + '/book/')
+    const getBooks = async () => {
+        let books = [];
+        await axios.get(BASE_URL_SERVER + '/book/')
             .then(res => {
-                // console.log("res: ", res.data.data);
-                let books = res.data.data;
-                setData(books);
+                books = res.data.data;
+                dispatch(setBooks(books));
             })
             .catch(err => {
                 console.log("Error when get all books: ", err);
-            })
-    }, [])
+            });
+
+        return books;
+    }
+
+    useEffect(() => {
+
+        if (firstRender) {
+            let booksList = getBooks();
+            setData(books);
+            setFirstRender(false);
+        } else {
+            setData(books);
+        }
+
+
+
+        // axios.get(BASE_URL_SERVER + '/book/')
+        //     .then(res => {
+        //         // console.log("res: ", res.data.data);
+        //         let books = res.data.data;
+        //         setData(books);
+        //         dispatch(setBooks(books));
+        //     })
+        //     .catch(err => {
+        //         console.log("Error when get all books: ", err);
+        //     })
+    }, [books])
 
     const columns = [
         {title: 'ID', dataIndex: 'BOOK_ID'},

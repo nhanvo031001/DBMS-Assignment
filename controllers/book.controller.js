@@ -14,7 +14,9 @@ async function findAll(req, res, next) {
 
 async function findByFieldMySql(req, res, next) {
     try {
-        const result = await bookService.findByFieldMySql(req.params.field, req.body.text);
+        let field = req.params.field;
+        let text = req.body.text ? req.body.text : req.query.text;
+        const result = await bookService.findByFieldMySql(field, text);
         res.send(new APIResponse("200", "OK", result));
     } catch (err) {
         console.error(`Error get courses: `, err.message);
@@ -24,7 +26,9 @@ async function findByFieldMySql(req, res, next) {
 
 async function findByFieldNeo4j(req, res, next) {
     try {
-        const result = await bookService.findByFieldNeo4j(req.params.field, req.body.text);
+        let field = req.params.field;
+        let text = req.body.text ? req.body.text : req.query.text;
+        const result = await bookService.findByFieldNeo4j(field, text);
         res.send(new APIResponse("200", "OK", result));
     } catch (err) {
         console.error(`Error get courses: `, err.message);

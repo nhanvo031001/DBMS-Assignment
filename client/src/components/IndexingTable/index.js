@@ -37,18 +37,6 @@ export default function IndexingTable() {
             setData(books);
         }
 
-
-
-        // axios.get(BASE_URL_SERVER + '/book/')
-        //     .then(res => {
-        //         // console.log("res: ", res.data.data);
-        //         let books = res.data.data;
-        //         setData(books);
-        //         dispatch(setBooks(books));
-        //     })
-        //     .catch(err => {
-        //         console.log("Error when get all books: ", err);
-        //     })
     }, [books])
 
     const columns = [

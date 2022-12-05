@@ -18,12 +18,8 @@ H
 services/book.service.js,c\d\cde1835fe29ff01d67f50242b0b4513775ae9de8
 G
 routes/courses.route.js,3\2\3204a6d1200e5381071956a5f40d1bae4c613bdc
-N
-controllers/book.controller.js,0\b\0b23f4cd54a0a27823657b8d05c76b286924f9d5
 ?
 utils/helper.js,d\d\ddff1262f96602aebea9be8b2ed9fd4dc9959490
-O
-repositories/book.repository.js,c\0\c06f2526a251aaea87f6534c4eaf17da5d6f4ce4
 D
 routes/book.route.js,1\3\13a921695423e857023172e284881be7f0d1eafa
 4

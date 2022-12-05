@@ -22,6 +22,7 @@ async function findByFieldMySql(field, text) {
         switch (field) {
             case "description":
                 let startTime = new Date().getTime();
+                console.log("text: ", text)
                 const [rows] = await mysql.query(`SELECT *
                                                   FROM BOOK
                                                   WHERE MATCH (${field}) AGAINST('${text}' IN BOOLEAN MODE);`);

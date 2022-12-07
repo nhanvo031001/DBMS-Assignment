@@ -49,11 +49,13 @@ async function createDummyBookNeo4j() {
 
     let data = await getDataFromPublicAPIs();
 
+    let count = 1;
     for (const record of data) {
         await session
-            .run('create (:BOOK{book_name:$book_name, description: $description});', {
+            .run('create (:BOOK{book_name:$book_name, description: $description, book_id: $book_id});', {
                 book_name: record.API,
-                description: record.Description
+                description: record.Description,
+                book_id: count,
             })
             .then(result => {
             })
@@ -63,6 +65,7 @@ async function createDummyBookNeo4j() {
             .then(() => {
 
             })
+        count +=1;
     }
 
     console.log("create successfully neo4j");

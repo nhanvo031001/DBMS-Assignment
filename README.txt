@@ -16,3 +16,8 @@ Các bước khi clone về:
 Module neo4j-driver: https://www.npmjs.com/package/neo4j-driver
 
 
+=============
+front end: trong folder "client"
+chạy front end:
+	npm install
+	npm start

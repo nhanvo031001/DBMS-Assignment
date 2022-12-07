@@ -27,8 +27,9 @@ async function findByFieldMySql(field, text) {
                                                   FROM BOOK
                                                   WHERE MATCH (${field}) AGAINST('${text}' IN BOOLEAN MODE);`);
                 let endTime = new Date().getTime();
-                console.log("Time exec MySql: ", (endTime - startTime) / 1000, " s");
-                return rows
+                let timeExec = (endTime - startTime) / 1000;
+                console.log("Time exec MySql: ", timeExec, " s");
+                return {rows, timeExec};
                 break;
 
             default:
@@ -41,25 +42,31 @@ async function findByFieldMySql(field, text) {
 }
 
 async function findByFieldNeo4j(field, text) {
-    let res = [];
+    let resList = [];
 
     try {
 
         switch (field) {
             case "description":
                 let startTime = new Date().getTime();
+                let timeExec = 0;
                 await session
                     .run(`CALL db.index.fulltext.queryNodes("fulltext_description_index", "${text}")
                                 YIELD node, score
-                                RETURN node.book_name, node.${field}, score`)
+                                RETURN id(node) as BOOK_ID, node.book_name as BOOK_NAME, node.${field} as DESCRIPTION`)
                     .then(result => {
 
                         result.records.forEach(record => {
                             let obj = {};
                             for (let i = 0; i < record.keys.length; i++) {
-                                obj[record.keys[i]] = record._fields[i];
+                                if (record._fields[i].low) {
+                                    // default id of node
+                                    obj[record.keys[i]] = record._fields[i].low;
+                                } else {
+                                    obj[record.keys[i]] = record._fields[i];
+                                }
                             }
-                            res.push(obj);
+                            resList.push(obj);
                         })
                     })
                     .catch(error => {
@@ -68,12 +75,11 @@ async function findByFieldNeo4j(field, text) {
                     .then(() => {
 
                         let endTime = new Date().getTime();
-                        console.log("Time exec Neo4j: ", (endTime - startTime) / 1000, " s");
-
-                        return res;
+                        timeExec = (endTime - startTime) / 1000;
+                        console.log("Time exec Neo4j: ", timeExec, " s")
                     })
 
-                return res
+                return {resList, timeExec};
                 break;
 
             default:
@@ -84,7 +90,7 @@ async function findByFieldNeo4j(field, text) {
         console.log("Error: ", err.message);
     }
 
-    return res;
+    return resList;
 }
 
 

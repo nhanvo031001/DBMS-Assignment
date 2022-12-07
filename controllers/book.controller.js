@@ -16,8 +16,8 @@ async function findByFieldMySql(req, res, next) {
     try {
         let field = req.params.field;
         let text = req.body.text ? req.body.text : req.query.text;
-        const result = await bookService.findByFieldMySql(field, text);
-        res.send(new APIResponse("200", "OK", result));
+        const {rows, timeExec} = await bookService.findByFieldMySql(field, text);
+        res.send(new APIResponse("200", "OK", rows, timeExec));
     } catch (err) {
         console.error(`Error get courses: `, err.message);
         res.send(new APIResponse("404", "Not Found", null));
@@ -28,8 +28,8 @@ async function findByFieldNeo4j(req, res, next) {
     try {
         let field = req.params.field;
         let text = req.body.text ? req.body.text : req.query.text;
-        const result = await bookService.findByFieldNeo4j(field, text);
-        res.send(new APIResponse("200", "OK", result));
+        const {resList, timeExec} = await bookService.findByFieldNeo4j(field, text);
+        res.send(new APIResponse("200", "OK", resList, timeExec));
     } catch (err) {
         console.error(`Error get courses: `, err.message);
         res.send(new APIResponse("404", "Not Found", null));

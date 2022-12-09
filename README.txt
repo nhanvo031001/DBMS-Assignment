@@ -21,3 +21,10 @@ front end: trong folder "client"
 chạy front end:
 	npm install
 	npm start
+	
+	
+https://ant.design/
+
+task:
+	mỗi người tự sinh dummy data để test riêng
+	tự suy nghĩ case cho phần của mình

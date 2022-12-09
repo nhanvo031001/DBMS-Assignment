@@ -51,6 +51,7 @@ async function createDummyBookNeo4j() {
 
     let count = 1;
     for (const record of data) {
+        
         await session
             .run('create (:BOOK{book_name:$book_name, description: $description, book_id: $book_id});', {
                 book_name: record.API,

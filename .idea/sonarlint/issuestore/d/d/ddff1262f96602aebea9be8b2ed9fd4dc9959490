@@ -1,6 +1,0 @@
-
-Zjavascript:S1481'"7Remove the declaration of the unused 'result' variable.(Ì® ”8åﬂæ„Õ0
-Wjavascript:S1854'"4Remove this useless assignment to variable "result".(Ì® ”8åﬂæ„Õ0
-ãjavascript:S1172<"cRemove the unused function parameter "result" or rename it to "_result" to make intention explicit.(ï´íÁ˛ˇˇˇˇ8ª˘Ú„Õ0
-Hjavascript:S1186<" Unexpected empty arrow function.(ï´íÁ˛ˇˇˇˇ8ÍÑ¡„Õ0
-Hjavascript:S1186A" Unexpected empty arrow function.(Â•ΩÔ¸ˇˇˇˇ8´ÆÛ„Õ0

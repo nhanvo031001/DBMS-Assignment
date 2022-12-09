@@ -1,8 +1,6 @@
 
 G
 configs/mysql.config.js,1\d\1df2cb17ff93a5c70d35f7e6b296ebc73b0bcbb6
-G
-configs/neo4j.config.js,9\4\94a5627d0ee2c8370da106cc10603496cc622118
 K
 services/courses.service.js,2\8\285f4b7404568e704af00e8bb04651f246392d30
 :
@@ -14,8 +12,6 @@ R
 "repositories/courses.repository.js,f\8\f8f66be66800ee96a61556cc99e1c1da177b07df
 G
 routes/courses.route.js,3\2\3204a6d1200e5381071956a5f40d1bae4c613bdc
-D
-routes/book.route.js,1\3\13a921695423e857023172e284881be7f0d1eafa
 4
 .env,3\c\3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
 C
@@ -48,27 +44,5 @@ C
 client/src/store.js,4\a\4afe2750c2c347c6e38ea33d5c926b1ae43d2dfb
 C
 client/src/index.js,7\6\76cbb38a5cef42611c7af13985f39248682f4aa1
-8
-index.js,a\7\a77b15c0d64cf6111e025645e562faf8ccabb9d7
-A
-client/src/App.js,f\6\f6b8a135eb07bb80aa582994bcf1a8ccacd783ee
 W
 'client/src/components/Indexing/index.js,d\5\d566fecf3e9e010e54b68d26f9f908a36aab8596
-f
-6client/src/components/IndexingTableSearchBar/style.css,d\7\d7c50ccd3f19d7f2a49fb75ef6559449d9ef91f3
-H
-services/book.service.js,c\d\cde1835fe29ff01d67f50242b0b4513775ae9de8
-E
-models/APIResponse.js,b\e\bea344d338b013478728f4f672d78b31ad20bfe5
-N
-controllers/book.controller.js,0\b\0b23f4cd54a0a27823657b8d05c76b286924f9d5
-?
-utils/helper.js,d\d\ddff1262f96602aebea9be8b2ed9fd4dc9959490
-\
-,client/src/components/IndexingTable/index.js,7\9\79df4c4d5f33fe7ebcdce541e1bd3ca65a329a8d
-O
-client/src/redux/bookReducer.js,8\2\82ac8694e3560f282d2b50752371c10b7f27b3c3
-e
-5client/src/components/IndexingTableSearchBar/index.js,0\7\0744a070250f674cb0cc52a95e3adf780bb1acd5
-O
-repositories/book.repository.js,c\0\c06f2526a251aaea87f6534c4eaf17da5d6f4ce4

@@ -1,6 +1,9 @@
 const bookService = require('../services/book.service');
 const APIResponse = require('../models/APIResponse');
-const {createDummyBookMySql, createDummyBookNeo4j} = require("../utils/helper");
+const {createDummyBookMySql, createDummyBookNeo4j, filterDataFromBeersAPI, filterDataFromEntriesAPI,
+    createDummyBookMySqlGenScriptManually, createDummyBookNeo4jGenScriptManually
+} = require("../utils/helper");
+
 
 async function findAll(req, res, next) {
     try {
@@ -11,6 +14,7 @@ async function findAll(req, res, next) {
         res.send(new APIResponse("404", "Not Found", null));
     }
 }
+
 
 async function findByFieldMySql(req, res, next) {
     try {
@@ -24,6 +28,7 @@ async function findByFieldMySql(req, res, next) {
     }
 }
 
+
 async function findByFieldNeo4j(req, res, next) {
     try {
         let field = req.params.field;
@@ -36,6 +41,7 @@ async function findByFieldNeo4j(req, res, next) {
     }
 }
 
+
 async function createDummyForMySql(req, res, next) {
     try {
         await createDummyBookMySql();
@@ -46,9 +52,54 @@ async function createDummyForMySql(req, res, next) {
     }
 }
 
+
+async function createDummyForMySqlManually(req, res, next) {
+    try {
+        await createDummyBookMySqlGenScriptManually();
+        res.send(new APIResponse("200", "OK", "Create for Mysql successfully !"));
+    } catch (err) {
+        console.error(`Error get courses: `, err.message);
+        res.send(new APIResponse("404", "Not Found", null));
+    }
+}
+
+
 async function createDummyForNeo4j(req, res, next) {
     try {
         await createDummyBookNeo4j();
+        res.send(new APIResponse("200", "OK", "Create for Neo4j successfully !"));
+    } catch (err) {
+        console.error(`Error get courses: `, err.message);
+        res.send(new APIResponse("404", "Not Found", null));
+    }
+}
+
+
+async function createDummyForNeo4jManually(req, res, next) {
+    try {
+        await createDummyBookNeo4jGenScriptManually();
+        res.send(new APIResponse("200", "OK", "Create for Mysql successfully !"));
+    } catch (err) {
+        console.error(`Error get courses: `, err.message);
+        res.send(new APIResponse("404", "Not Found", null));
+    }
+}
+
+
+async function filterDataAPIBeers(req, res, next) {
+    try {
+        await filterDataFromBeersAPI();
+        res.send(new APIResponse("200", "OK", "Create for Neo4j successfully !"));
+    } catch (err) {
+        console.error(`Error get courses: `, err.message);
+        res.send(new APIResponse("404", "Not Found", null));
+    }
+}
+
+
+async function filterDataAPIEntries(req, res, next) {
+    try {
+        await filterDataFromEntriesAPI();
         res.send(new APIResponse("200", "OK", "Create for Neo4j successfully !"));
     } catch (err) {
         console.error(`Error get courses: `, err.message);
@@ -63,5 +114,9 @@ module.exports = {
     createDummyForMySql,
     createDummyForNeo4j,
     findByFieldMySql,
-    findByFieldNeo4j
+    findByFieldNeo4j,
+    filterDataAPIBeers,
+    filterDataAPIEntries,
+    createDummyForMySqlManually,
+    createDummyForNeo4jManually
 }

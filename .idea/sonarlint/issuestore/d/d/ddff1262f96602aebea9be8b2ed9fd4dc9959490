@@ -1,0 +1,17 @@
+
+mjavascript:S4138B"LExpected a `for-of` loop instead of a `for` loop with this simple iteration.(ßÖË‡ûÿÿÿÿ
+:javascript:S125^"Remove this commented out code.(¥Ý±¶
+hjavascript:S4138c"LExpected a `for-of` loop instead of a `for` loop with this simple iteration.(µò¸Â
+Yjavascript:S1481‘"7Remove the declaration of the unused 'result' variable.(›²‡ûýÿÿÿÿ
+Vjavascript:S1854‘"4Remove this useless assignment to variable "result".(›²‡ûýÿÿÿÿ
+`javascript:S1481›"7Remove the declaration of the unused 'record' variable.(…‹¬âüÿÿÿÿ8ÊºËìÏ0
+]javascript:S1854›"4Remove this useless assignment to variable "record".(…‹¬âüÿÿÿÿ8ÊºËìÏ0
+…javascript:S1172Ÿ"cRemove the unused function parameter "result" or rename it to "_result" to make intention explicit.(•«’çþÿÿÿÿ
+Bjavascript:S1186Ÿ" Unexpected empty arrow function.(•«’çþÿÿÿÿ
+Bjavascript:S1186¤" Unexpected empty arrow function.(å¥½ïüÿÿÿÿ
+\javascript:S1854·"3Remove this useless assignment to variable "count".(Òá˜Ãøÿÿÿÿ8ž…ÌìÏ0
+Tjavascript:S1481É"7Remove the declaration of the unused 'result' variable.(í¨ÊÓ
+Qjavascript:S1854É"4Remove this useless assignment to variable "result".(í¨ÊÓ
+…javascript:S1172à"cRemove the unused function parameter "result" or rename it to "_result" to make intention explicit.(•«’çþÿÿÿÿ
+Bjavascript:S1186à" Unexpected empty arrow function.(•«’çþÿÿÿÿ
+Bjavascript:S1186å" Unexpected empty arrow function.(å¥½ïüÿÿÿÿ

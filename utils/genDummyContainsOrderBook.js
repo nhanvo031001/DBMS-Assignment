@@ -4,6 +4,7 @@ const session = require("../configs/neo4j.config");
 const {MAX_AUTHOR, MAX_BOOK, MAX_ORDER, MAX_CONTAINS_ORDER_BOOK} = require("./variables");
 const MAX_DUMMY_RECORDS = MAX_CONTAINS_ORDER_BOOK;
 const {getRandomInt, genBookNameRandom, genBookDescriptionRandom, convertDataMySQLToJSON} = require("./helper");
+const mysql = require("../configs/mysql.config");
 
 
 async function createDummyContainsOrderBookMySqlGenScriptManuallyOfficial() {
@@ -35,48 +36,41 @@ async function createDummyContainsOrderBookMySqlGenScriptManuallyOfficial() {
 }
 
 
-async function createDummyAuthorNeo4jGenScriptManuallyOfficial() {
+async function createDummyContainsOrderBookNeo4jGenScriptManuallyOfficial() {
 
-    const dummyGeneratedMySql = JSON.parse(await convertDataMySQLToJSON());
+    const [rows] = await mysql.query("SELECT * FROM CONTAINS_ORDER_BOOK");
+    let jsonString = JSON.stringify(rows);
+    const dummyGeneratedMySql = JSON.parse(jsonString);
 
-    let query = '';
-    let queryForWrite = '';
+    let queryForRelationship = '';
     for (let i = 0; i < dummyGeneratedMySql.length; i++) {
-        let id = dummyGeneratedMySql[i].BOOK_ID;
-        let name = dummyGeneratedMySql[i].BOOK_NAME.replaceAll(',', '').replaceAll(' ', '');
-        let description = dummyGeneratedMySql[i].DESCRIPTION;
-        let price = dummyGeneratedMySql[i].PRICE;
-        let pageNumber = dummyGeneratedMySql[i].PAGE_NUMBER;
+        let bookId = dummyGeneratedMySql[i].BOOK_ID;
+        let orderId = dummyGeneratedMySql[i].ORDER_ID;
 
-        query += `create (:BOOK {BOOK_ID: '${id}', BOOK_NAME: '${name}', 
-        DESCRIPTION: '${description}', PRICE: '${price}', PAGE_NUMBER: '${pageNumber}'}) \n`;
 
-        queryForWrite += `create (:BOOK {BOOK_ID: '${id}', BOOK_NAME: '${name}', 
-        DESCRIPTION: '${description}', PRICE: '${price}', PAGE_NUMBER: '${pageNumber}'}); \n`;
+        queryForRelationship = '';
+        queryForRelationship += `MATCH (B:BOOK {BOOK_ID:'${bookId}'}) MATCH (O:ORDERS {ORDERS_ID: '${orderId}'}) 
+        CREATE (O) -[:CONTAINS_BOOK]-> (B);`;
+
+        await session
+            .run(queryForRelationship)
+            .then(result => {
+            })
+            .catch(error => {
+                console.log(error)
+            })
+            .then(() => {
+
+            })
     }
 
-    query += ';'
 
-    fileWrite.writeFile(__dirname + '\\NEO4J-SCRIPT-BOOK.txt', queryForWrite, function (err) {
-        if (err) return console.log(err);
-    });
-
-    await session
-        .run(query)
-        .then(result => {
-        })
-        .catch(error => {
-            console.log(error)
-        })
-        .then(() => {
-
-        })
 
     console.log("create successfully neo4j manually official book")
 }
 
 
-
 module.exports = {
-    createDummyContainsOrderBookMySqlGenScriptManuallyOfficial
+    createDummyContainsOrderBookMySqlGenScriptManuallyOfficial,
+    createDummyContainsOrderBookNeo4jGenScriptManuallyOfficial
 }

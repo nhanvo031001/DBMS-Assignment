@@ -4,6 +4,7 @@ const session = require("../configs/neo4j.config");
 const {MAX_AUTHOR, MAX_BOOK, MAX_BELONGS_BOOK_AUTHOR} = require("./variables");
 const MAX_DUMMY_RECORDS = MAX_BELONGS_BOOK_AUTHOR;
 const {getRandomInt, genBookNameRandom, genBookDescriptionRandom, convertDataMySQLToJSON} = require("./helper");
+const mysql = require("../configs/mysql.config");
 
 
 async function createDummyBelongsBookAuthorMySqlGenScriptManuallyOfficial() {
@@ -34,42 +35,33 @@ async function createDummyBelongsBookAuthorMySqlGenScriptManuallyOfficial() {
 }
 
 
-async function createDummyAuthorNeo4jGenScriptManuallyOfficial() {
+async function createDummyBelongsBookAuthorNeo4jGenScriptManuallyOfficial() {
 
-    const dummyGeneratedMySql = JSON.parse(await convertDataMySQLToJSON());
+    const [rows] = await mysql.query("SELECT * FROM BELONGS_BOOK_AUTHOR");
+    let jsonString = JSON.stringify(rows);
+    const dummyGeneratedMySql = JSON.parse(jsonString);
 
-    let query = '';
-    let queryForWrite = '';
+    let queryForRelationship = '';
     for (let i = 0; i < dummyGeneratedMySql.length; i++) {
-        let id = dummyGeneratedMySql[i].BOOK_ID;
-        let name = dummyGeneratedMySql[i].BOOK_NAME.replaceAll(',', '').replaceAll(' ', '');
-        let description = dummyGeneratedMySql[i].DESCRIPTION;
-        let price = dummyGeneratedMySql[i].PRICE;
-        let pageNumber = dummyGeneratedMySql[i].PAGE_NUMBER;
+        let bookId = dummyGeneratedMySql[i].BOOK_ID;
+        let authorId = dummyGeneratedMySql[i].AUTHOR_ID;
 
-        query += `create (:BOOK {BOOK_ID: '${id}', BOOK_NAME: '${name}', 
-        DESCRIPTION: '${description}', PRICE: '${price}', PAGE_NUMBER: '${pageNumber}'}) \n`;
 
-        queryForWrite += `create (:BOOK {BOOK_ID: '${id}', BOOK_NAME: '${name}', 
-        DESCRIPTION: '${description}', PRICE: '${price}', PAGE_NUMBER: '${pageNumber}'}); \n`;
+        queryForRelationship = '';
+        queryForRelationship += `MATCH (B:BOOK {BOOK_ID:'${bookId}'}) MATCH (A:AUTHOR {AUTHOR_ID: '${authorId}'}) 
+        CREATE (A) -[:WRITE_BOOK]-> (B);`;
+
+        await session
+            .run(queryForRelationship)
+            .then(result => {
+            })
+            .catch(error => {
+                console.log(error)
+            })
+            .then(() => {
+
+            })
     }
-
-    query += ';'
-
-    fileWrite.writeFile(__dirname + '\\NEO4J-SCRIPT-BOOK.txt', queryForWrite, function (err) {
-        if (err) return console.log(err);
-    });
-
-    await session
-        .run(query)
-        .then(result => {
-        })
-        .catch(error => {
-            console.log(error)
-        })
-        .then(() => {
-
-        })
 
     console.log("create successfully neo4j manually official book")
 }
@@ -77,5 +69,6 @@ async function createDummyAuthorNeo4jGenScriptManuallyOfficial() {
 
 
 module.exports = {
-    createDummyBelongsBookAuthorMySqlGenScriptManuallyOfficial
+    createDummyBelongsBookAuthorMySqlGenScriptManuallyOfficial,
+    createDummyBelongsBookAuthorNeo4jGenScriptManuallyOfficial
 }

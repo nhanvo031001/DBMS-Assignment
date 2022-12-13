@@ -1,0 +1,10 @@
+create (:ORDERS {ORDERS_ID: '1', TOTAL_PRICE: '3823', 
+        QUANTITY: '3'}); 
+create (:ORDERS {ORDERS_ID: '2', TOTAL_PRICE: '8599', 
+        QUANTITY: '12'}); 
+create (:ORDERS {ORDERS_ID: '3', TOTAL_PRICE: '4079', 
+        QUANTITY: '12'}); 
+create (:ORDERS {ORDERS_ID: '4', TOTAL_PRICE: '10369', 
+        QUANTITY: '8'}); 
+create (:ORDERS {ORDERS_ID: '5', TOTAL_PRICE: '8988', 
+        QUANTITY: '8'}); 

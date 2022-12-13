@@ -9,10 +9,14 @@ const {createDummyBookMySql, createDummyBookNeo4j, filterDataFromBeersAPI, filte
 } = require("../utils/helper");
 const {createDummyBookMySqlGenScriptManuallyOfficial, createDummyBookNeo4jGenScriptManuallyOfficial} = require("../utils/genDummyBook");
 const {createDummyCustomerMySqlGenScriptManuallyOfficial, createDummyCustomerNeo4jGenScriptManuallyOfficial} = require("../utils/genDummyCustomer");
-const {createDummyOrderMySqlGenScriptManuallyOfficial} = require("../utils/genDummyOrders");
-const {createDummyAuthorMySqlGenScriptManuallyOfficial} = require("../utils/genDummyAuthor");
-const {createDummyBelongsBookAuthorMySqlGenScriptManuallyOfficial} = require("../utils/genDummyBelongsBookAuthor");
-const {createDummyContainsOrderBookMySqlGenScriptManuallyOfficial} = require("../utils/genDummyContainsOrderBook");
+const {createDummyOrderMySqlGenScriptManuallyOfficial, createDummyOrderNeo4jGenScriptManuallyOfficial} = require("../utils/genDummyOrders");
+const {createDummyAuthorMySqlGenScriptManuallyOfficial, createDummyAuthorNeo4jGenScriptManuallyOfficial} = require("../utils/genDummyAuthor");
+const {createDummyBelongsBookAuthorMySqlGenScriptManuallyOfficial,
+    createDummyBelongsBookAuthorNeo4jGenScriptManuallyOfficial
+} = require("../utils/genDummyBelongsBookAuthor");
+const {createDummyContainsOrderBookMySqlGenScriptManuallyOfficial,
+    createDummyContainsOrderBookNeo4jGenScriptManuallyOfficial
+} = require("../utils/genDummyContainsOrderBook");
 
 
 async function findAll(req, res, next) {
@@ -170,7 +174,19 @@ async function createDummyCustomerForNeo4jManually(req, res, next) {
 async function createDummyOrdersForMySqlManually(req, res, next) {
     try {
         // await createDummyBookMySqlGenScriptManually();
-        await createDummyOrderMySqlGenScriptManuallyOfficial();
+        await createDummyOrderNeo4jGenScriptManuallyOfficial();
+        res.send(new APIResponse("200", "OK", "Create for Mysql manually successfully customer!"));
+    } catch (err) {
+        console.error(`Error get courses: `, err.message);
+        res.send(new APIResponse("404", "Not Found", null));
+    }
+}
+
+
+async function createDummyOrdersForNeo4jManually(req, res, next) {
+    try {
+        // await createDummyBookMySqlGenScriptManually();
+        await createDummyOrderNeo4jGenScriptManuallyOfficial();
         res.send(new APIResponse("200", "OK", "Create for Mysql manually successfully customer!"));
     } catch (err) {
         console.error(`Error get courses: `, err.message);
@@ -184,6 +200,17 @@ async function createDummyAuthorForMySqlManually(req, res, next) {
     try {
         // await createDummyBookMySqlGenScriptManually();
         await createDummyAuthorMySqlGenScriptManuallyOfficial();
+        res.send(new APIResponse("200", "OK", "Create for Mysql manually successfully customer!"));
+    } catch (err) {
+        console.error(`Error get courses: `, err.message);
+        res.send(new APIResponse("404", "Not Found", null));
+    }
+}
+
+async function createDummyAuthorForNeo4jManually(req, res, next) {
+    try {
+        // await createDummyBookMySqlGenScriptManually();
+        await createDummyAuthorNeo4jGenScriptManuallyOfficial();
         res.send(new APIResponse("200", "OK", "Create for Mysql manually successfully customer!"));
     } catch (err) {
         console.error(`Error get courses: `, err.message);
@@ -205,11 +232,35 @@ async function createDummyBelongsBookAuthorForMySqlManually(req, res, next) {
 }
 
 
+async function createDummyBelongsBookAuthorForNeo4jManually(req, res, next) {
+    try {
+        // await createDummyBookMySqlGenScriptManually();
+        await createDummyBelongsBookAuthorNeo4jGenScriptManuallyOfficial();
+        res.send(new APIResponse("200", "OK", "Create for Mysql manually successfully customer!"));
+    } catch (err) {
+        console.error(`Error get courses: `, err.message);
+        res.send(new APIResponse("404", "Not Found", null));
+    }
+}
+
+
 
 async function createDummyContainsOrderBookForMySqlManually(req, res, next) {
     try {
         // await createDummyBookMySqlGenScriptManually();
         await createDummyContainsOrderBookMySqlGenScriptManuallyOfficial();
+        res.send(new APIResponse("200", "OK", "Create for Mysql manually successfully customer!"));
+    } catch (err) {
+        console.error(`Error get courses: `, err.message);
+        res.send(new APIResponse("404", "Not Found", null));
+    }
+}
+
+
+async function createDummyContainsOrderBookForNeo4jManually(req, res, next) {
+    try {
+        // await createDummyBookMySqlGenScriptManually();
+        await createDummyContainsOrderBookNeo4jGenScriptManuallyOfficial();
         res.send(new APIResponse("200", "OK", "Create for Mysql manually successfully customer!"));
     } catch (err) {
         console.error(`Error get courses: `, err.message);
@@ -228,6 +279,26 @@ async function createDummyAllForMySqlManually(req, res, next) {
 
         await createDummyContainsOrderBookMySqlGenScriptManuallyOfficial();
         await createDummyBelongsBookAuthorMySqlGenScriptManuallyOfficial();
+
+        res.send(new APIResponse("200", "OK", "Create for Mysql manually successfully customer!"));
+    } catch (err) {
+        console.error(`Error get courses: `, err.message);
+        res.send(new APIResponse("404", "Not Found", null));
+    }
+}
+
+
+
+async function createDummyAllForNeo4jManually(req, res, next) {
+    try {
+        await createDummyBookNeo4jGenScriptManuallyOfficial()
+        await createDummyCustomerNeo4jGenScriptManuallyOfficial()
+        await createDummyOrderNeo4jGenScriptManuallyOfficial();
+        await createDummyAuthorNeo4jGenScriptManuallyOfficial();
+
+
+        await createDummyContainsOrderBookNeo4jGenScriptManuallyOfficial();
+        await createDummyBelongsBookAuthorNeo4jGenScriptManuallyOfficial();
 
         res.send(new APIResponse("200", "OK", "Create for Mysql manually successfully customer!"));
     } catch (err) {
@@ -263,17 +334,22 @@ module.exports = {
     createDummyCustomerForNeo4jManually,
 
     createDummyOrdersForMySqlManually,
+    createDummyOrdersForNeo4jManually,
 
     createDummyAuthorForMySqlManually,
+    createDummyAuthorForNeo4jManually,
 
 
     createDummyBelongsBookAuthorForMySqlManually,
+    createDummyBelongsBookAuthorForNeo4jManually,
 
 
     createDummyContainsOrderBookForMySqlManually,
+    createDummyContainsOrderBookForNeo4jManually,
 
 
     createDummyAllForMySqlManually,
+    createDummyAllForNeo4jManually,
 
     findAllCustomer,
     findAllOrders

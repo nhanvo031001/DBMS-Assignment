@@ -1,20 +1,10 @@
-create (:BOOK {BOOK_ID: '1', BOOK_NAME: 'CANHONEY', 
-        DESCRIPTION: ' Scraping create geoparsing Offset WorldCoinIndex OKEx Online of Modi Bundles', PRICE: '92271', PAGE_NUMBER: '310'}); 
-create (:BOOK {BOOK_ID: '2', BOOK_NAME: 'PRESERVATIVESREALLY', 
-        DESCRIPTION: ' Brazil Games with Tetra for Photography currencies update information Branch', PRICE: '14667', PAGE_NUMBER: '453'}); 
-create (:BOOK {BOOK_ID: '3', BOOK_NAME: 'PILSNERAND', 
-        DESCRIPTION: ' and datasets detect about and you New API Open file', PRICE: '73070', PAGE_NUMBER: '673'}); 
-create (:BOOK {BOOK_ID: '4', BOOK_NAME: 'THETHEN', 
-        DESCRIPTION: ' data applications MLB funny including Government, the 5 News Solutions:', PRICE: '90465', PAGE_NUMBER: '445'}); 
-create (:BOOK {BOOK_ID: '5', BOOK_NAME: 'BITTERWOODS.', 
-        DESCRIPTION: ' Api Information source The Territory of of Bomb Imsea Zip', PRICE: '17794', PAGE_NUMBER: '473'}); 
-create (:BOOK {BOOK_ID: '6', BOOK_NAME: 'DONEW', 
-        DESCRIPTION: ' attraction from UK Curated of Data estimation Real-time city time', PRICE: '66873', PAGE_NUMBER: '94'}); 
-create (:BOOK {BOOK_ID: '7', BOOK_NAME: 'BEERA', 
-        DESCRIPTION: ' Exchangeratesapi.io (delayed, Drive Malware French Netherlands managing varying music Content', PRICE: '22230', PAGE_NUMBER: '647'}); 
-create (:BOOK {BOOK_ID: '8', BOOK_NAME: 'THISWEISSE.', 
-        DESCRIPTION: ' continuous search Geographic Canada FishWatch address Wars for code and', PRICE: '38042', PAGE_NUMBER: '412'}); 
-create (:BOOK {BOOK_ID: '9', BOOK_NAME: 'ANDBELGIAN', 
-        DESCRIPTION: ' Smart Modeling sentiment Transpo platforms times data Data place hits', PRICE: '94707', PAGE_NUMBER: '665'}); 
-create (:BOOK {BOOK_ID: '10', BOOK_NAME: 'WANTOUR', 
-        DESCRIPTION: ' for Bobs API explore sequences with Game for and GeneradorDNI', PRICE: '53751', PAGE_NUMBER: '60'}); 
+create (:BOOK {BOOK_ID: '1', BOOK_NAME: 'ONCEGOOD', 
+        DESCRIPTION: ' Aeronautical well Index for Longdo for filters 1 RESTful organizations', PRICE: '22641', PAGE_NUMBER: '127'}); 
+create (:BOOK {BOOK_ID: '2', BOOK_NAME: 'REFINEDCRUSHED', 
+        DESCRIPTION: ' on hacker Job image, datasets for Bureau CoinGecko numverify England', PRICE: '58219', PAGE_NUMBER: '308'}); 
+create (:BOOK {BOOK_ID: '3', BOOK_NAME: 'THREEBRAINCHILD', 
+        DESCRIPTION: ' ExchangeRate-API select current Jikan creation with Off US Vampire liqour', PRICE: '66555', PAGE_NUMBER: '544'}); 
+create (:BOOK {BOOK_ID: '4', BOOK_NAME: 'OFPROVIDED', 
+        DESCRIPTION: ' from IMDb flair Supportivekoala any anonymously Dragons & Web is', PRICE: '56953', PAGE_NUMBER: '203'}); 
+create (:BOOK {BOOK_ID: '5', BOOK_NAME: 'ADDSTHE', 
+        DESCRIPTION: ' testimonial persons, Decompiler Image candidate geographical Epoch developers Government Surah,', PRICE: '42705', PAGE_NUMBER: '121'}); 

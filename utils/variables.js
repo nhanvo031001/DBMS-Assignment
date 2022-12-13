@@ -1,10 +1,10 @@
 const CURRENT_DIRECTORY = __dirname;
-const MAX_BOOK = 5000;
-const MAX_CUSTOMER = 5000;
-const MAX_ORDER = 100;
-const MAX_AUTHOR = 1000;
-const MAX_CONTAINS_ORDER_BOOK = 100;
-const MAX_BELONGS_BOOK_AUTHOR = 100;
+const MAX_BOOK = 5;
+const MAX_CUSTOMER = 5;
+const MAX_ORDER = 5;
+const MAX_AUTHOR = 5;
+const MAX_CONTAINS_ORDER_BOOK = 2;
+const MAX_BELONGS_BOOK_AUTHOR = 2;
 
 module.exports = {
     CURRENT_DIRECTORY,

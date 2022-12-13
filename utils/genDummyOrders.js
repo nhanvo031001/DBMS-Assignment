@@ -52,13 +52,19 @@ async function createDummyOrderNeo4jGenScriptManuallyOfficial() {
         let id = dummyGeneratedMySql[i].ORDERS_ID;
         let quantity = dummyGeneratedMySql[i].QUANTITY;
         let totalPrice = dummyGeneratedMySql[i].TOTAL_PRICE;
+        let customerId = dummyGeneratedMySql[i].CUSTOMER_ID;
 
-        query += `create (:ORDERS {ORDERS_ID: '${id}', TOTAL_PRICE: '${name}', 
-        CUSTOMER_ID: '${birthday}', PHONE_NUMBER: '${phoneNumber}'}) \n`;
+        query += `create (:ORDERS {ORDERS_ID: '${id}', TOTAL_PRICE: '${totalPrice}', 
+        QUANTITY: '${quantity}'}) \n`;
 
-        queryForWrite += `create (:ORDERS {CUSTOMER_ID: '${id}', CUSTOMER_NAME: '${name}', 
-        BIRTHDAY: '${birthday}', PHONE_NUMBER: '${phoneNumber}'}); \n`;
+        // query += `MATCH (C:CUSTOMER {CUSTOMER_ID:'${customerId}'}) MATCH (O:ORDERS {ORDERS_ID: '${id}'}) CREATE (C) -[:HAS]-> (O)\n`;
+
+        queryForWrite += `create (:ORDERS {ORDERS_ID: '${id}', TOTAL_PRICE: '${totalPrice}', 
+        QUANTITY: '${quantity}'}); \n`;
     }
+
+
+
 
     query += ';'
 
@@ -77,11 +83,33 @@ async function createDummyOrderNeo4jGenScriptManuallyOfficial() {
 
         })
 
+
+    let queryForRelationship = '';
+    for (let i = 0; i < dummyGeneratedMySql.length; i++) {
+        let id = dummyGeneratedMySql[i].ORDERS_ID;
+        let customerId = dummyGeneratedMySql[i].CUSTOMER_ID;
+
+        queryForRelationship = '';
+        queryForRelationship += `MATCH (C:CUSTOMER {CUSTOMER_ID:'${customerId}'}) MATCH (O:ORDERS {ORDERS_ID: '${id}'}) CREATE (C) -[:HAS_ORDER]-> (O);`;
+
+        await session
+            .run(queryForRelationship)
+            .then(result => {
+            })
+            .catch(error => {
+                console.log(error)
+            })
+            .then(() => {
+
+            })
+
+    }
+
     console.log("create successfully neo4j manually official order")
 }
 
 
-
 module.exports = {
     createDummyOrderMySqlGenScriptManuallyOfficial,
+    createDummyOrderNeo4jGenScriptManuallyOfficial
 }

@@ -24,20 +24,25 @@ router.post('/mysqlCustomerManually', bookController.createDummyCustomerForMySql
 router.post('/neo4jCustomerManually', bookController.createDummyCustomerForNeo4jManually);
 
 router.post('/mysqlOrdersManually', bookController.createDummyOrdersForMySqlManually);
+router.post('/neo4jOrdersManually', bookController.createDummyOrdersForNeo4jManually);
 
 
 router.post('/mysqlAuthorManually', bookController.createDummyAuthorForMySqlManually);
+router.post('/neo4jAuthorManually', bookController.createDummyAuthorForNeo4jManually);
 
 
 
 router.post('/mysqlBelongsBookAuthorManually', bookController.createDummyBelongsBookAuthorForMySqlManually);
+router.post('/neo4jBelongsBookAuthorManually', bookController.createDummyBelongsBookAuthorForNeo4jManually);
 
 
 
 router.post('/mysqlContainsOrderBookManually', bookController.createDummyContainsOrderBookForMySqlManually);
+router.post('/neo4jContainsOrderBookManually', bookController.createDummyContainsOrderBookForNeo4jManually);
 
 
 router.post('/genAllMySqlManually', bookController.createDummyAllForMySqlManually)
+router.post('/genAllNeo4jManually', bookController.createDummyAllForNeo4jManually)
 
 
 module.exports = router

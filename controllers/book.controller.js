@@ -1,7 +1,7 @@
 const bookService = require('../services/book.service');
 const APIResponse = require('../models/APIResponse');
 const {createDummyBookMySql, createDummyBookNeo4j, filterDataFromBeersAPI, filterDataFromEntriesAPI,
-    createDummyBookMySqlGenScriptManually, createDummyBookNeo4jGenScriptManually
+    createDummyBookMySqlGenScriptManually, createDummyBookNeo4jGenScriptManually, convertDataMySQLToJSON
 } = require("../utils/helper");
 
 
@@ -56,7 +56,7 @@ async function createDummyForMySql(req, res, next) {
 async function createDummyForMySqlManually(req, res, next) {
     try {
         await createDummyBookMySqlGenScriptManually();
-        res.send(new APIResponse("200", "OK", "Create for Mysql successfully !"));
+        res.send(new APIResponse("200", "OK", "Create for Mysql manually successfully !"));
     } catch (err) {
         console.error(`Error get courses: `, err.message);
         res.send(new APIResponse("404", "Not Found", null));
@@ -78,7 +78,7 @@ async function createDummyForNeo4j(req, res, next) {
 async function createDummyForNeo4jManually(req, res, next) {
     try {
         await createDummyBookNeo4jGenScriptManually();
-        res.send(new APIResponse("200", "OK", "Create for Mysql successfully !"));
+        res.send(new APIResponse("200", "OK", "Create for Neo4j manually successfully !"));
     } catch (err) {
         console.error(`Error get courses: `, err.message);
         res.send(new APIResponse("404", "Not Found", null));
@@ -108,6 +108,15 @@ async function filterDataAPIEntries(req, res, next) {
 }
 
 
+async function testFunction(req, res, next) {
+    try {
+        await convertDataMySQLToJSON();
+        res.send(new APIResponse("200", "OK", "convert data json"));
+    } catch (err) {
+        console.error(`Error get courses: `, err.message);
+        res.send(new APIResponse("404", "Not Found", null));
+    }
+}
 
 module.exports = {
     findAll,
@@ -118,5 +127,6 @@ module.exports = {
     filterDataAPIBeers,
     filterDataAPIEntries,
     createDummyForMySqlManually,
-    createDummyForNeo4jManually
+    createDummyForNeo4jManually,
+    testFunction
 }

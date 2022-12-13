@@ -45,3 +45,5 @@ CREATE TABLE BOOK
 
 -- ALTER TABLE COURSE
 --     ADD UNIQUE INDEX unique_index (COURSE_NAME);
+
+alter table book add fulltext index fulltext_description_book (description);

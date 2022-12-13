@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bookController = require('../controllers/book.controller');
-const {filterDataAPIEntries, filterDataAPIBeers} = require("../controllers/book.controller");
+const {filterDataAPIEntries, filterDataAPIBeers, testFunction} = require("../controllers/book.controller");
 
 
 router.get('/', bookController.findAll);
@@ -9,12 +9,14 @@ router.get('/mysql/:field', bookController.findByFieldMySql);
 router.get('/neo4j/:field', bookController.findByFieldNeo4j);
 router.get('/filterDataBeers', filterDataAPIBeers);
 router.get('/filterDataEntries', filterDataAPIEntries);
-
+router.get('/test', testFunction)
 
 router.post('/mysql', bookController.createDummyForMySql);
 router.post('/mysqlManually', bookController.createDummyForMySqlManually);
 router.post('/neo4j', bookController.createDummyForNeo4j);
 router.post('/neo4jManually', bookController.createDummyForNeo4jManually);
+
+
 
 
 

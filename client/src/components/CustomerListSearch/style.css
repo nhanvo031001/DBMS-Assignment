@@ -1,0 +1,20 @@
+.search-select {
+    display: flex;
+    margin-left: 30%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.customer-list-table-search-bar {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-between;
+    justify-content: space-between;
+
+}
+
+.time-search {
+    width: 100%;
+    padding-left: 30%;
+    font-weight: bold;
+}

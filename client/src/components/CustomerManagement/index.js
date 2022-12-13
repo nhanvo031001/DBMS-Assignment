@@ -1,4 +1,6 @@
 import './style.css';
+import CustomerList from "../CustomerList";
+import CustomerListSearch from "../CustomerListSearch";
 
 
 export default function CustomerManagement() {
@@ -6,6 +8,8 @@ export default function CustomerManagement() {
         <div className='customer-management'>
             <h2>CustomerManagement</h2>
 
+            <CustomerListSearch/>
+            <CustomerList />
         </div>
     );
 }

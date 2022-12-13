@@ -18,5 +18,10 @@
     "mysql2": "^2.3.3",
     "neo4j-driver": "^5.3.0",
     "nodemon": "^2.0.20"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "utils/DATA-MYSQL.json"
+    ]
   }
 }

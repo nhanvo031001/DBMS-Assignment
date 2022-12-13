@@ -12,6 +12,7 @@ const beersJSON = require('./beers.json');
 const entriesJSON = require('./entries.json');
 const dataWordsBeers = require('./wordsBeersAPI.json');
 const dataWordsEntries = require('./wordsEntriesAPI.json');
+// const dummyGeneratedMySql = require('./DATA-MYSQL.json');
 
 function getRandomInt(min, max) {
     min = Math.ceil(min);
@@ -142,50 +143,62 @@ async function createDummyBookMySqlGenScriptManually() {
                       VALUES ('${bookName}', '${description}', '${pageNo}', '${price}');`;
     }
 
+    await fileWrite.writeFile(__dirname + '\\MYSQL-SCRIPT.txt', execQuery, function (err) {
+        if (err) return console.log(err);
+    });
+
+    // await convertDataMySQLToJSON();
+
     const [result] = await db.query(execQuery);
+
+
+
     console.log("create successfully mysql manually")
 }
 
 
 async function createDummyBookNeo4jGenScriptManually() {
 
-    let data = await getDataFromPublicAPIs();
+    // await convertDataMySQLToJSON();
+    // const dummyGeneratedMySql = require('./DATA-MYSQL.json');
+
+    const dummyGeneratedMySql = JSON.parse(await convertDataMySQLToJSON());
 
     let count = 1;
-    for (const record of data) {
 
-        await session
-            .run(`create (:BOOK{book_name:"nhan vo book", description: "nhan vo description", book_id: "haha"});`)
-            .then(result => {
-            })
-            .catch(error => {
-                console.log(error)
-            })
-            .then(() => {
+    let query = '';
+    let queryForWrite = '';
+    for (let i = 0; i < dummyGeneratedMySql.length; i++) {
+        let id = dummyGeneratedMySql[i].BOOK_ID;
+        let name = dummyGeneratedMySql[i].BOOK_NAME.replaceAll(',', '').replaceAll(' ', '');
+        let description = dummyGeneratedMySql[i].DESCRIPTION;
+        let price = dummyGeneratedMySql[i].PRICE;
+        let pageNumber = dummyGeneratedMySql[i].PAGE_NUMBER;
 
-            })
+        query += `create (:BOOK {BOOK_ID: '${id}', BOOK_NAME: '${name}', 
+        DESCRIPTION: '${description}', PRICE: '${price}', PAGE_NUMBER: '${pageNumber}'}) \n`;
 
-        // await session
-        //     .run('create (:BOOK{book_name:$book_name, description: $description, book_id: $book_id});', {
-        //         book_name: record.API,
-        //         description: record.Description,
-        //         book_id: count,
-        //     })
-        //     .then(result => {
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
-        //     .then(() => {
-        //
-        //     })
-
-        count += 1;
-
-        break;
+        queryForWrite += `create (:BOOK {BOOK_ID: '${id}', BOOK_NAME: '${name}', 
+        DESCRIPTION: '${description}', PRICE: '${price}', PAGE_NUMBER: '${pageNumber}'}); \n`;
     }
 
-    console.log("create successfully neo4j manually");
+    query += ';'
+
+    fileWrite.writeFile(__dirname + '\\NEO4J-SCRIPT.txt', queryForWrite, function (err) {
+        if (err) return console.log(err);
+    });
+
+    await session
+        .run(query)
+        .then(result => {
+        })
+        .catch(error => {
+            console.log(error)
+        })
+        .then(() => {
+
+        })
+
 
 }
 
@@ -235,6 +248,17 @@ async function createDummyBookNeo4j() {
     console.log("create successfully neo4j");
 }
 
+async function convertDataMySQLToJSON() {
+    const [rows] = await mysql.query("SELECT * FROM book");
+
+    let jsonString = JSON.stringify(rows);
+    // fileWrite.writeFile(__dirname + '\\DATA-MYSQL.json', jsonString, function (err) {
+    //     if (err) return console.log(err);
+    // });
+    // console.log("rows: ", rows);
+    return jsonString
+}
+
 
 module.exports = {
     getRandomInt,
@@ -243,5 +267,6 @@ module.exports = {
     filterDataFromBeersAPI,
     filterDataFromEntriesAPI,
     createDummyBookMySqlGenScriptManually,
-    createDummyBookNeo4jGenScriptManually
+    createDummyBookNeo4jGenScriptManually,
+    convertDataMySQLToJSON,
 }

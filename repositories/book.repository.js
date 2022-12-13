@@ -22,7 +22,7 @@ async function findByFieldMySql(field, text) {
         switch (field) {
             case "description":
                 let startTime = new Date().getTime();
-                const [rows] = await mysql.query(`SELECT *
+                const [rows] = await mysql.query(`SELECT BOOK_NAME, DESCRIPTION
                                                   FROM BOOK
                                                   WHERE MATCH (${field}) AGAINST('${text}' IN BOOLEAN MODE);`);
                 let endTime = new Date().getTime();
@@ -50,9 +50,14 @@ async function findByFieldNeo4j(field, text) {
                 let startTime = new Date().getTime();
                 let timeExec = 0;
                 await session
+                    // .run(`CALL db.index.fulltext.queryNodes("fulltext_description_index", "${text}")
+                    //             YIELD node, score
+                    //             RETURN node.book_name as BOOK_NAME, node.${field} as DESCRIPTION`)
+
                     .run(`CALL db.index.fulltext.queryNodes("fulltext_description_index", "${text}")
-                                YIELD node, score
-                                RETURN node.book_name as BOOK_NAME, node.${field} as DESCRIPTION`)
+                                YIELD node
+                                RETURN node.BOOK_NAME as BOOK_NAME, node.DESCRIPTION as DESCRIPTION`)
+
                     .then(result => {
 
                         result.records.forEach(record => {

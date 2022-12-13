@@ -269,4 +269,6 @@ module.exports = {
     createDummyBookMySqlGenScriptManually,
     createDummyBookNeo4jGenScriptManually,
     convertDataMySQLToJSON,
+    genBookNameRandom,
+    genBookDescriptionRandom
 }

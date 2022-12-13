@@ -16,6 +16,25 @@ async function findAll() {
     }
 }
 
+async function findAllCustomer() {
+    try {
+        const [rows] = await mysql.query("SELECT * FROM CUSTOMER");
+        return rows
+    } catch (err) {
+        console.log("Error: ", err.message);
+    }
+}
+
+async function findAllOrders() {
+    try {
+        const [rows] = await mysql.query("SELECT * FROM ORDERS");
+        return rows
+    } catch (err) {
+        console.log("Error: ", err.message);
+    }
+}
+
+
 async function findByFieldMySql(field, text) {
     try {
 
@@ -101,5 +120,7 @@ async function findByFieldNeo4j(field, text) {
 module.exports = {
     findAll,
     findByFieldMySql,
-    findByFieldNeo4j
+    findByFieldNeo4j,
+    findAllCustomer,
+    findAllOrders
 }

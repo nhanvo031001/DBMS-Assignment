@@ -42,7 +42,7 @@ export default function BookList() {
     const columns = [
         {title: 'ID', dataIndex: 'BOOK_ID'},
         {title: 'TITLE', dataIndex: 'BOOK_NAME'},
-        {title: 'AUTHOR', dataIndex: 'AUTHOR'},
+        // {title: 'AUTHOR', dataIndex: 'AUTHOR'},
         {title: 'DESCRIPTION', dataIndex: 'DESCRIPTION'},
     ];
 

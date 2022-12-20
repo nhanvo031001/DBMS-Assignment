@@ -8,14 +8,5 @@ driver.verifyConnectivity();
 
 const session = driver.session();
 
-// session.run('match (n) return n').subscribe({
-//     onNext: record => {
-//         console.log("record: ", record._fields[0])
-//     },
-//     onCompleted: () => {
-
-//     }
-// })
-
 module.exports = session;
 

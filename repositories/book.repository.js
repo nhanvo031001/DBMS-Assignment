@@ -9,7 +9,8 @@ const DUMMY_BOOKS = 2000;
 
 async function findAll() {
     try {
-        const [rows] = await mysql.query("SELECT * FROM book");
+        // const [rows] = await mysql.query("SELECT * FROM book");
+        const [rows] = await mysql.query("SELECT BOOK_ID, BOOK_NAME, DESCRIPTION FROM book");
         return rows
     } catch (err) {
         console.log("Error: ", err.message);
@@ -18,7 +19,8 @@ async function findAll() {
 
 async function findAllCustomer() {
     try {
-        const [rows] = await mysql.query("SELECT * FROM CUSTOMER");
+        // const [rows] = await mysql.query("SELECT * FROM CUSTOMER");
+        const [rows] = await mysql.query("SELECT CUSTOMER_ID, CUSTOMER_NAME, BIRTHDAY, PHONE_NUMBER FROM CUSTOMER");
         return rows
     } catch (err) {
         console.log("Error: ", err.message);
@@ -27,7 +29,8 @@ async function findAllCustomer() {
 
 async function findAllOrders() {
     try {
-        const [rows] = await mysql.query("SELECT * FROM ORDERS");
+        // const [rows] = await mysql.query("SELECT * FROM ORDERS, CUSTOMER WHERE ORDERS.CUSTOMER_ID = CUSTOMER.CUSTOMER_ID");
+        const [rows] = await mysql.query("SELECT ORDERS_ID, TOTAL_PRICE, ORDERS.CUSTOMER_ID, CUSTOMER_NAME FROM ORDERS, CUSTOMER WHERE ORDERS.CUSTOMER_ID = CUSTOMER.CUSTOMER_ID");
         return rows
     } catch (err) {
         console.log("Error: ", err.message);
@@ -41,7 +44,7 @@ async function findByFieldMySql(field, text) {
         switch (field) {
             case "description":
                 let startTime = new Date().getTime();
-                const [rows] = await mysql.query(`SELECT BOOK_NAME, DESCRIPTION
+                const [rows] = await mysql.query(`SELECT BOOK_ID, BOOK_NAME, DESCRIPTION
                                                   FROM BOOK
                                                   WHERE MATCH (${field}) AGAINST('${text}' IN BOOLEAN MODE);`);
                 let endTime = new Date().getTime();
@@ -75,7 +78,7 @@ async function findByFieldNeo4j(field, text) {
 
                     .run(`CALL db.index.fulltext.queryNodes("fulltext_description_index", "${text}")
                                 YIELD node
-                                RETURN node.BOOK_NAME as BOOK_NAME, node.DESCRIPTION as DESCRIPTION`)
+                                RETURN node.BOOK_ID as BOOK_ID, node.BOOK_NAME as BOOK_NAME, node.DESCRIPTION as DESCRIPTION`)
 
                     .then(result => {
 
